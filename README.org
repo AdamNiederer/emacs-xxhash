@@ -1,0 +1,35 @@
+* emacs-xxhash
+Hash things really really fast, from emacs!
+
+This library is an emacs lisp wrapper around the wonderful [[https://github.com/Cyan4973/xxHash][libxxhash]].
+
+** Setup
+First, make sure your copy of emacs was compiled with the `--with-modules` flag,
+and has a version greater than or equal to 25.1
+
+Then, compile the library:
+
+#+BEGIN_SRC shell
+  make
+  cp xxh.so $EMACS_LOAD_PATH
+#+END_SRC
+
+To use the library from emacs:
+
+#+BEGIN_SRC elisp
+  (require 'xxh)
+  (xxh-64-str "Hello, world!")
+#+END_SRC
+** Functions
+- ~(xxh-64 vec)~ - Return a hex string of representing the 64-bit hash of
+  ~vec~. ~vec~ must be a vector, and each value in the vector must be a number
+  less than 255 (if it's not, all bits higher than 8 are ignored)
+- ~(xxh-64-str str)~ - Return a hex string representing the 64-bit hash of
+  ~vec~. ~vec~ must be a string.
+- ~(xxh-32 vec)~ - Return a hex string of representing the 32-bit hash of
+  ~vec~. ~vec~ must be a vector, and each value in the vector must be a number
+  less than 255 (if it's not, all bits higher than 8 are ignored)
+- ~(xxh-32-str str)~ - Return a hex string representing the 32-bit hash of
+  ~vec~. ~vec~ must be a string.
+** License
+GPLv3+
